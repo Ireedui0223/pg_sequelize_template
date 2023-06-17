@@ -1,34 +1,39 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-export default class Blog extends Model {
-  public author!: string;
-  public title!: string;
-  public description!: string;
 
+export default class Category extends Model {
   public static createModel(sequelize: Sequelize) {
     this.init(
       {
-        authorId: {
+        id: {
+          primaryKey: true,
           type: DataTypes.UUID,
+          defaultValue: DataTypes.UUIDV4,
           allowNull: false
         },
         title: {
           type: DataTypes.STRING(200),
           allowNull: false,
           validate: {
-            len: [10, 200]
+            len: [2, 200],
+            msg: 'Invalid title'
+          }
+        },
+        icon: {
+          type: DataTypes.STRING(255),
+          allowNull: false,
+          validate: {
+            len: [2, 255],
+            msg: 'invalid icon'
           }
         },
         description: {
           type: DataTypes.STRING(255),
-          validate: {
-            len: [0, 255]
-          }
+          allowNull: true
         }
       },
       {
         sequelize,
-        modelName: 'Blogs',
-        timestamps: true
+        modelName: 'Category'
       }
     );
   }
