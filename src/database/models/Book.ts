@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { BOOK_ENUM } from './Enum';
+import { BOOK_ENUM } from './enum';
 export default class Book extends Model {
   public static createModel(sequelize: Sequelize) {
     this.init(
@@ -13,22 +13,28 @@ export default class Book extends Model {
         title: {
           type: DataTypes.STRING(255),
           validate: {
-            len: [2, 255],
-            msg: 'Invalid title'
+            len: [2, 255]
           },
           allowNull: false
         },
         author: {
           type: DataTypes.STRING,
           validate: {
-            len: [2, 255],
-            msg: 'Invalid author'
+            len: [2, 255]
           },
           allowNull: false
         },
         description: {
           type: DataTypes.STRING(255),
           allowNull: true
+        },
+        image: {
+          type: DataTypes.STRING(255),
+          allowNull: true
+        },
+        url: {
+          type: DataTypes.STRING(100),
+          allowNull: false
         },
         about: {
           type: DataTypes.STRING(255),
@@ -65,7 +71,8 @@ export default class Book extends Model {
       },
       {
         sequelize,
-        modelName: 'Book'
+        modelName: 'Book',
+        timestamps: true
       }
     );
   }

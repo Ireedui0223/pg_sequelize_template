@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { USER_ENUM } from './Enum';
+import { USER_ENUM } from './enum';
 export default class User extends Model {
   public email!: string;
   public username!: string;
@@ -23,12 +23,12 @@ export default class User extends Model {
         password: {
           type: DataTypes.STRING(64),
           validate: {
-            is: /^[0-9a-zA-Z]/i,
-            msg: 'Invalid password'
+            is: /^[0-9a-zA-Z]/i
           }
         },
         roles: {
-          type: DataTypes.ENUM(...USER_ENUM.ROLES)
+          type: DataTypes.ENUM(...USER_ENUM.ROLES),
+          defaultValue: USER_ENUM.ROLES[1]
         },
         isVerify: {
           type: DataTypes.ENUM(...USER_ENUM.VERIFY)
@@ -41,7 +41,7 @@ export default class User extends Model {
 
       {
         sequelize,
-        modelName: 'users',
+        modelName: 'User',
         timestamps: true
       }
     );

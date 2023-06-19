@@ -27,7 +27,7 @@ export default class Blog extends Model {
       },
       {
         sequelize,
-        modelName: 'Blogs',
+        modelName: 'Blog',
         timestamps: true
       }
     );

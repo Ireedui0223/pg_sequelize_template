@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { CHAPTER_ENUM } from './Enum';
+import { CHAPTER_ENUM } from './enum';
 
 export default class Chapter extends Model {
   public static createModel(sequelize: Sequelize) {

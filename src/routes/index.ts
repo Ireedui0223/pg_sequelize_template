@@ -1,5 +1,7 @@
 import { Router, Request, Response } from 'express';
 import userRoutes from './api/user';
+import bookRouter from './api/book';
+import categoryRouter from './api/category';
 
 const route = Router();
 
@@ -13,5 +15,6 @@ route.post(
 );
 
 route.use('/api', userRoutes);
-
+route.use('/api', bookRouter);
+route.use('/api', categoryRouter);
 export default route;

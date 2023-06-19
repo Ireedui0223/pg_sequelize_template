@@ -1,25 +1,17 @@
 import { Router, Request, Response } from 'express';
-import UserController from '../../controllers/user';
+import BookController from '../../controllers/book';
 
 const router = Router();
 
 router.post(
-  '/create_user',
+  '/create_book',
   async (req: Request, res: Response): Promise<Response> => {
     try {
       const { body } = req;
-
-      const { username, email, password, roles } = body;
-
-      const user = await UserController.createUser({
-        username,
-        email,
-        password,
-        roles
-      });
+      const book = await BookController.createBook(body);
       return res.json({
         success: true,
-        message: user
+        message: book
       });
     } catch (err) {
       return res.json({
@@ -31,17 +23,17 @@ router.post(
 );
 
 router.get(
-  '/get_users',
-  async (_: Request, res: Response): Promise<Response> => {
+  '/get_books',
+  async (__: Request, res: Response): Promise<Response> => {
     try {
-      const users = await UserController.getUsers();
+      const books = await BookController.getBooks();
       return res.json({
         success: true,
-        users
+        message: books
       });
     } catch (err) {
       return res.json({
-        success: false,
+        success: true,
         message: err
       });
     }

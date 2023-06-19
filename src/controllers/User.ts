@@ -1,20 +1,18 @@
-import { UserModel } from '../database';
+import User from '../database/models/user';
 
 export default class UserController {
   static async createUser(doc): Promise<any> {
-    const { username, email, password } = doc;
-    const user = await UserModel.create({
+    const { username, email, password, roles } = doc;
+    const user = await User.create({
       username,
       email,
-      password
+      password,
+      roles
     });
-    user.save();
-    const user_data = user.toJSON();
-    return user_data;
+    return user;
   }
   static async getUsers() {
-    const users = await UserModel.findAll();
-    const users_data = JSON.stringify(users);
-    return users_data;
+    const users = await User.findAll();
+    return users;
   }
 }

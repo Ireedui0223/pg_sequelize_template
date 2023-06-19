@@ -14,16 +14,14 @@ export default class Category extends Model {
           type: DataTypes.STRING(200),
           allowNull: false,
           validate: {
-            len: [2, 200],
-            msg: 'Invalid title'
+            len: [2, 200]
           }
         },
         icon: {
           type: DataTypes.STRING(255),
           allowNull: false,
           validate: {
-            len: [2, 255],
-            msg: 'invalid icon'
+            len: [2, 255]
           }
         },
         description: {
