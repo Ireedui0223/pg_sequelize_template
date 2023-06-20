@@ -1,38 +1,44 @@
 import 'dotenv/config';
 import { Sequelize } from 'sequelize';
-import Blog from './models/blog';
-import User from './models/user';
+import Chapter from './models/chapter';
 import Book from './models/book';
 import Category from './models/category';
-import Chapter from './models/chapter';
-import File from './models/file';
+import Book_category from './models/book_category';
 
-const sequelize = new Sequelize('sequelize_db', 'postgres', '9185', {
+const sequelize = new Sequelize('meBook', 'postgres', '9185', {
   dialect: 'postgres',
   host: 'localhost',
   logging: false
 });
 
-let models = [User, Blog, Book, Category, Chapter, File];
+let models = [Book, Category, Book_category, Chapter];
 
 models.forEach((model) => model.createModel(sequelize));
 
-// Book.hasMany(Category, { as: 'categories' });
-// Category.belongsTo(Book);
-// Category.belongsTo(Book, {
-//   foreignKey: 'id',
-//   as: 'categoryId'
-// });
-// Category.hasMany(Book, { as: 'bookId' });
-// Book.belongsTo(Book, {
-//   foreignKey: 'id',
-//   as: 'bookId'
+Chapter.hasOne(Book, {
+  sourceKey: 'id',
+  foreignKey: 'chapter_id'
+});
+
+Book.hasOne(Book_category, {
+  sourceKey: 'bookId',
+  foreignKey: 'bookId'
+});
+
+Category.hasMany(Book_category, {
+  sourceKey: 'id',
+  foreignKey: 'chapterId'
+});
+
+// Category.hasMany(Book, {
+//   foreignKey: 'categories',
+//   sourceKey: 'id'
 // });
 
 const connectionDb = async (): Promise<void> => {
   try {
     sequelize.authenticate();
-    sequelize.sync({ force: false, alter: true });
+    sequelize.sync({ force: true, alter: true });
   } catch (err) {
     console.log('Database error:', err.message);
   }

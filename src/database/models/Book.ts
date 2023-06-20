@@ -4,7 +4,7 @@ export default class Book extends Model {
   public static createModel(sequelize: Sequelize) {
     this.init(
       {
-        id: {
+        bookId: {
           primaryKey: true,
           type: DataTypes.UUID,
           defaultValue: DataTypes.UUIDV4,
