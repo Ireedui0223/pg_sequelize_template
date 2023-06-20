@@ -20,16 +20,8 @@ Chapter.hasOne(Book, {
   foreignKey: 'chapter_id'
 });
 
-Book.hasOne(Book_category, {
-  sourceKey: 'bookId',
-  foreignKey: 'bookId'
-});
-
-Category.hasMany(Book_category, {
-  sourceKey: 'id',
-  foreignKey: 'chapterId'
-});
-
+Book.belongsToMany(Category, { through: Book_category });
+Category.belongsToMany(Book, { through: Book_category });
 // Category.hasMany(Book, {
 //   foreignKey: 'categories',
 //   sourceKey: 'id'
