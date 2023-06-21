@@ -14,8 +14,7 @@ export default class Chapter extends Model {
           type: DataTypes.STRING(200),
           allowNull: false,
           validate: {
-            len: [2, 200],
-            msg: 'Invalid title'
+            len: [2, 200]
           }
         },
         text: {

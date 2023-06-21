@@ -40,4 +40,23 @@ router.get(
   }
 );
 
+router.get(
+  '/get_books_by_categories',
+  async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const { body } = req;
+      const books = await BookController.getBookByCategoires(body);
+      return res.json({
+        success: true,
+        message: books
+      });
+    } catch (err) {
+      return res.json({
+        success: true,
+        message: err
+      });
+    }
+  }
+);
+
 export default router;

@@ -6,8 +6,8 @@ export default class Book_category extends Model {
       {},
       {
         sequelize,
-        timestamps: false,
-        modelName: 'Book_category'
+        modelName: 'Book_category',
+        timestamps: false
       }
     );
   }

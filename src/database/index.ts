@@ -11,7 +11,7 @@ const sequelize = new Sequelize('meBook', 'postgres', '9185', {
   logging: false
 });
 
-let models = [Book, Category, Book_category, Chapter];
+let models = [Book, Category, Chapter, Book_category];
 
 models.forEach((model) => model.createModel(sequelize));
 
@@ -20,17 +20,21 @@ Chapter.hasOne(Book, {
   foreignKey: 'chapter_id'
 });
 
-Book.belongsToMany(Category, { through: Book_category });
-Category.belongsToMany(Book, { through: Book_category });
-// Category.hasMany(Book, {
-//   foreignKey: 'categories',
-//   sourceKey: 'id'
-// });
+Book.belongsToMany(Category, {
+  through: Book_category,
+  as: 'Books',
+  foreignKey: 'Book_id'
+});
+Category.belongsToMany(Book, {
+  through: Book_category,
+  as: 'Categories',
+  foreignKey: 'Category_id'
+});
 
 const connectionDb = async (): Promise<void> => {
   try {
     sequelize.authenticate();
-    sequelize.sync({ force: true, alter: true });
+    sequelize.sync({ force: false, alter: true });
   } catch (err) {
     console.log('Database error:', err.message);
   }

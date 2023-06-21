@@ -9,7 +9,48 @@ export default class File extends Model {
           type: DataTypes.UUID,
           defaultValue: DataTypes.UUIDV4
         },
-        mimetype: DataTypes.STRING(50)
+        mimetype: {
+          type: DataTypes.STRING(50),
+          allowNull: false,
+          validate: {
+            len: [4, 100]
+          }
+        },
+        name: {
+          type: DataTypes.STRING(100),
+          validate: {
+            len: [4, 100]
+          }
+        },
+        size: {
+          type: DataTypes.INTEGER,
+          defaultValue: 0
+        },
+        url: {
+          type: DataTypes.STRING(100),
+          allowNull: false
+        },
+        key: {
+          type: DataTypes.STRING(100),
+          validate: {
+            len: [10, 100]
+          }
+        },
+        thumb_800: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
+        thumb_300: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
+        isDeleted: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false
+        },
+        status: {
+          type: DataTypes.ENUM
+        }
       },
       {
         sequelize,
