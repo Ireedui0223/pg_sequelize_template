@@ -23,8 +23,8 @@ export default class File extends Model {
           }
         },
         size: {
-          type: DataTypes.INTEGER,
-          defaultValue: 0
+          type: DataTypes.STRING(64),
+          allowNull: false
         },
         url: {
           type: DataTypes.STRING(100),
@@ -47,9 +47,6 @@ export default class File extends Model {
         isDeleted: {
           type: DataTypes.BOOLEAN,
           defaultValue: false
-        },
-        status: {
-          type: DataTypes.ENUM
         }
       },
       {

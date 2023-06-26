@@ -60,12 +60,10 @@ export default class BookController {
   static async getBookByCategoires({ category_id }) {
     console.log(category_id);
 
-    const books = await BookModel.findByPk(category_id, {
+    const books = await BookModel.findAll({
       include: [
         {
           model: Category,
-          as: 'models',
-          attributes: ['title', 'icon', 'description'],
           through: {
             attributes: ['Book_id', 'Category_id']
           }

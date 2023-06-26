@@ -28,10 +28,6 @@ export default class Book extends Model {
           type: DataTypes.STRING(255),
           allowNull: true
         },
-        image: {
-          type: DataTypes.STRING(255),
-          allowNull: true
-        },
         url: {
           type: DataTypes.STRING(100),
           allowNull: false

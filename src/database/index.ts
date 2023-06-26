@@ -4,6 +4,7 @@ import Chapter from './models/chapter';
 import Book from './models/book';
 import Category from './models/category';
 import Book_category from './models/book_category';
+import File from './models/file';
 
 const sequelize = new Sequelize('meBook', 'postgres', '9185', {
   dialect: 'postgres',
@@ -11,7 +12,7 @@ const sequelize = new Sequelize('meBook', 'postgres', '9185', {
   logging: false
 });
 
-let models = [Book, Category, Chapter, Book_category];
+let models = [Book, Category, Chapter, Book_category, File];
 
 models.forEach((model) => model.createModel(sequelize));
 
@@ -29,6 +30,10 @@ Category.belongsToMany(Book, {
   through: Book_category,
   as: 'Categories',
   foreignKey: 'Category_id'
+});
+Book.belongsTo(File, {
+  targetKey: 'id',
+  foreignKey: 'image_id'
 });
 
 const connectionDb = async (): Promise<void> => {
