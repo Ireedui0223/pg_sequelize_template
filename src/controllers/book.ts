@@ -1,5 +1,6 @@
-import { BookModel } from '../database';
+import { BookModel } from '../database/init';
 import Category from '../database/models/category';
+import { FileModel } from '../database/init';
 import Book_category_controller from './book_category';
 export default class BookController {
   static async createBook(doc): Promise<any> {
@@ -7,7 +8,7 @@ export default class BookController {
       title,
       author,
       description,
-      image,
+      image_id,
       url,
       categories,
       about,
@@ -21,7 +22,7 @@ export default class BookController {
       title,
       author,
       description,
-      image,
+      image_id,
       url,
       categories,
       about,
@@ -44,7 +45,13 @@ export default class BookController {
     return book;
   }
   static async getBooks() {
-    const books = await BookModel.findAll();
+    console.log('books started');
+    const books = await BookModel.findAll({
+      include: [FileModel]
+    });
+
+    console.log(books, 'books');
+
     return books;
   }
 
@@ -76,7 +83,6 @@ export default class BookController {
       .catch((err) => {
         throw new Error(err);
       });
-    console.log(books, 'qwiejqwiej');
 
     return books;
   }

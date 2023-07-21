@@ -2,8 +2,7 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 import { USER_ENUM } from './enum';
 export default class User extends Model {
   public email!: string;
-  public username!: string;
-  public password!: string;
+  public roles!: string;
   public static createModel(sequelize: Sequelize) {
     this.init(
       {

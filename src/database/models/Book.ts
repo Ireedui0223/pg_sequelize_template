@@ -1,6 +1,8 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { BOOK_ENUM } from './enum';
 export default class Book extends Model {
+  public author!: string;
+  public title!: string;
   public static createModel(sequelize: Sequelize) {
     this.init(
       {

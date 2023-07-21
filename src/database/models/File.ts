@@ -13,7 +13,7 @@ export default class File extends Model {
           type: DataTypes.STRING(50),
           allowNull: false,
           validate: {
-            len: [4, 100]
+            len: [2, 100]
           }
         },
         name: {

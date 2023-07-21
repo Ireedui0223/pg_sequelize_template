@@ -1,5 +1,4 @@
-import { CategoryModel } from '../database';
-
+import { CategoryModel } from '../database/init';
 export default class CategoryController {
   static async createCategory(doc): Promise<any> {
     const { title, text, status, icon, description } = doc;
